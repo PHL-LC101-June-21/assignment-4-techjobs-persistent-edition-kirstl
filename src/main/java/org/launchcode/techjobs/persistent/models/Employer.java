@@ -11,6 +11,14 @@ import java.util.List;
 @Entity
 public class Employer extends AbstractEntity {
 
+    @NotBlank(message = "Field is required")
+    @Size(min=1 , max=255)
+    private String location;
+
+    @OneToMany
+    @JoinColumn(name = "employer_id")
+    private final List<Job> jobs = new ArrayList<>();
+
     public String getLocation() {
         return location;
     }
@@ -19,19 +27,13 @@ public class Employer extends AbstractEntity {
         this.location = location;
     }
 
-    @NotBlank(message = "Field is required")
-    @Size(min=1 , max=255)
-    private String location;
 
-    public Employer(String location) {
-        this.location = location;
-    }
 
     public Employer() {}
 
-    @OneToMany(mappedBy = "employer")
-    @JoinColumn
-    private List<Job> jobs = new ArrayList<>();
 
-}
+
+
+    }
+
 
